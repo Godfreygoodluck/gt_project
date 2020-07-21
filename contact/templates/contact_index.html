@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title> GT_Photography </title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% load static %}
+  <script src="{% static 'js/b_navDropDown.js' %}"></script>
+  <script src="{% static 'js/b_jquery.waypoints.min.js' %}"></script>
+  <script src="{% static 'js/b_infinite.min.js' %}"></script>
+  <script src="{% static 'js/b_jqueryMin.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'css/brand_index.css' %}">
+</head>
+
+<body style="background-color: chartreuse;">
+
+{% block page_content %}
+hjefljklsdj
+
+{% for contact in contacts %} 
+  <p>{{ contact.Address }}</p>
+  <p>{{ contact.Phone }}</p>
+  <p>{{ contact.Email }}</p>
+{% endfor %}
+
+{% endblock %}
+</body>
+</html>

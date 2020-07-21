@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title> GT_Photography </title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% load static %}
+  <script src="{% static 'js/bl_navDropDown.js' %}"></script>
+  <script src="{% static 'js/bl_jquery.waypoints.min.js' %}"></script>
+  <script src="{% static 'js/bl_infinite.min.js' %}"></script>
+  <script src="{% static 'js/bl_jqueryMin.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'css/blog_index.css' %}">
+</head>
+
+<body>
+  <header>
+    
+    <div class="header">
+      <img id="logo" src="{% static 'image/GT_LOGO.jpg' %}">
+      <h2 id="web_name">
+         <span id="web_name1" >G</span><span id="web_name2">T</span>
+         <span id="web_name3">Photo</span><span id="web_name4">graphy</span>
+      </h2>
+    </div>
+
+  </header>
+  <nav id="nav">
+    <div id="navContainer">
+      <div class="navbar">
+        <a href="http://127.0.0.1:8000/blog/">Home</a>
+        <div class="dropdown">
+          <button class="dropbtn" onclick="navDropDown()">Gallery</button>
+          <div id="myDropdown" class="dropdown-content">
+            <a href="http://127.0.0.1:8000/portrait/">Portrait</a>
+            <a href="http://127.0.0.1:8000/weddings/">Weddings</a>
+            <a href="http://127.0.0.1:8000/brand/">Brand</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="navbar">
+        <a href="">Contact</a>
+        <a href="">About</a>
+      </div>
+    </div>
+  </nav>
+
+ 
+
+  <section id="section">
+    
+  
+  {% block page_content %}
+  <div id="post-flex-container" class="infinite-container">
+    {% for post in numbers %}
+      <div class="flex-box" class="infinite-item">
+
+          <h2 class="title"  >
+            <a class="centerTitle" class="centerText" href="{% url 'blog_category' post.pk %}">
+              {{post.title}}
+            </a>
+          </h2>
+          
+          <div class="image_wraper" >  
+            <a target="_blank" href="{{ post.upload_image.url }}">
+                  <img class="image" src="{{ post.upload_image.url }}" alt=""  >
+            </a>
+          </div>    
+          
+          <div class="small" >
+            <small style="float: left;">
+              {{ post.created_on.date }} 
+            </small>
+          </div>
+
+          <p class="description">
+              {{ post.description | slice:":400" }}... 
+              <a href="{%url 'blog_category' post.pk%}">
+                continue reading
+              </a>
+          </p>
+          
+      </div>
+      
+    {% endfor %}
+    
+  </div>
+
+  <div class="extra">
+    {% if numbers.has_next %}
+        
+      <a  class="infinite-more-link" href="?page={{ numbers.next_page_number }}" style="text-decoration: none; ">
+       see more 
+      </a>
+        
+    {% endif %}
+  </div>
+
+    
+  <div class="loading" style="display: none;">
+    loading...
+  </div>
+
+  <script>
+    var infinite = new Waypoint.infinite({
+      element: $('.infinite-container')[0],
+      onBeforePageLoad: function(){
+        $('.loading').show();
+      },
+      onAfterPageLoad: function($items){
+        $('.loading').hide();
+      }
+    });
+  </script>
+  {% endblock %}
+
+
+    
+  </section>
+  
+  <footer>
+    <div class="footer">
+      <div class="footer_container">
+    
+        <div class="footer_con" >
+          <div class="contact" >
+            <h3>Contact Us</h3>
+            <p >
+              <b>Address:</b> Choba, Rivers State, Nigeria, Africa<br/>
+              <b>Phone:</b> +2348000000000<br/>
+              <b>Phone2:</b> +234801111111<br/>
+              <b>Email:</b> <a href="" style="display: flex; flex-wrap: wrap; color: #f2f2f2;">PhotographyWithGT@gmail.com</a>
+            </p>
+          </div>	
+    
+          <div class="social">
+            <h3 >Our Social Networks</h3>
+            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam.</p>
+    
+              <div >
+                <img src="{% static 'icons/facebook.png' %}" width="32" alt="Facebook">
+                <img src="{% static 'icons/twitter.png' %}" width="32" alt="Twitter">
+                <img src="{% static 'icons/linkedin.png' %}" width="32" alt="LinkedIn">
+                <img src="{% static 'icons/rss.png' %}" width="32" alt="RSS Feed">
+              </div>
+          </div>
+    
+          <div class="about" >
+            <h3>About Our Company</h3>
+              <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci.</p>
+          </div>
+        </div>
+    
+        <div >
+          <div class="">
+            <div class="footer-copyright">&copy; 2020  <a>Shoot with GT</a>.</div>
+          </div>
+        </div>
+    
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

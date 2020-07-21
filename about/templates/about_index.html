@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title> GT_Photography </title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% load static %}
+  <script src="{% static 'js/b_navDropDown.js' %}"></script>
+  <script src="{% static 'js/b_jquery.waypoints.min.js' %}"></script>
+  <script src="{% static 'js/b_infinite.min.js' %}"></script>
+  <script src="{% static 'js/b_jqueryMin.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'css/brand_index.css' %}">
+</head>
+
+<body>
+{% block page_content %}
+hjefljklsdj
+{% for about_photographer in About_Photographer %} 
+  <h1>{{ about_photographer.about }}</h1>
+  <h1>{{ about_photographer.photographers_image }}</h1>
+{% endfor %}
+
+{% for about_company in About_Company %} 
+  <p>{{ about_company.about }}</p>
+{% endfor %}
+
+
+fddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd<br>
+
+
+
+
+{% endblock %}
+
+</body>
+</html>
