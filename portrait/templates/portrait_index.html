@@ -1,4 +1,4 @@
-
+{% block content %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,28 +50,46 @@
 
         <div class="dropdown">
           <button class="dropbtn" onclick="AboutDropDown()">About</button>
-          
         </div>
         
       </div>
     </div>
 
-    <div id="contact_Dropdown" class="dropdown-content1">
-      <embed type="text/html" src="http://127.0.0.1:8000/contact/" width="500" height="200">
-    </div>
+    <div id="contact_about">
+      <div id="contact_Dropdown" class="dropdown-content1">
+        {% block page_content %}
+          <h2>contacts</h2>
+          
+          {% for contact in contacts %} 
+            <p><b>Address</b><address>{{ contact.Address }}</address></p>
+            <p><b>Phone</b>{{ contact.Phone }}</p>
+            <p><b>Email</b>{{ contact.Email }}</p>
+          {% endfor %}
 
-    <div id="about_Dropdown" class="dropdown-content1">
-      <iframe src="http://127.0.0.1:8000/about/"></iframe>
+        {% endblock %}      
+      </div>
+
+      <div id="about_Dropdown" class="dropdown-content1">
+        
+        <h2>about</h2>
+
+        {% for about_photographer in About_Photographer %} 
+          <h1>{{ about_photographer.photographers_image }}</h1>
+          <h1>{{ about_photographer.about }}</h1>
+        {% endfor %} 
+        
+        {% for about_company in About_Company %} 
+          <p>{{ about_company.about }}</p>
+        {% endfor %}
+
+      </div>
     </div>
   </nav>
 
  
 
   <section id="section">
-
     
-
-    {% block content %}
       <div id="gallery-flex-container" class="infinite-container">
         {% for portrait_project in numbers %} 
           <div class="flex-box" class="infinite-item" >
@@ -110,7 +128,7 @@
           }
         });
       </script>
-    {% endblock %}
+    
   </section>
   
   <footer>
@@ -158,3 +176,4 @@
 
 </body>
 </html>
+{% endblock %}

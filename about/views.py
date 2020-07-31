@@ -19,6 +19,5 @@ def photographer_index(request):
 	
         'About_Photographer' : About_Photographer
     }
-    print(About_Photographer)
     return render(request, 'about_index.html', context=context)
 	

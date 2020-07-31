@@ -5,10 +5,11 @@ import os
 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
+from contact.models import contact
+from about.models import about_company, about_photographer
 
 # Create your views here.
-
-
+ 
 
 def portrait_index(request):
 
@@ -27,3 +28,28 @@ def portrait_index(request):
     
     
     return render(request, 'portrait_index.html', {'numbers': numbers})
+
+
+def portrait_contact(request):
+    contacts = contact.objects.all()
+    context = {
+        'contacts' : contacts
+    }
+    return render(request, 'portrait_index.html', context=context)
+
+def aboutCompany_index(request):
+    About_Company = about_company.objects.all()
+    context = {
+        'About_Company' : About_Company
+    }
+    return render(request, 'portrait_index.html', context=context)
+
+def aboutPhotographer_index(request):
+    
+    About_Photographer = about_photographer.objects.all()
+    context = {
+    
+        'About_Photographer' : About_Photographer
+    }
+    print(About_Photographer)
+    return render(request, 'portrait_index.html', context=context)

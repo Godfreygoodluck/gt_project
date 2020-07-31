@@ -3,7 +3,7 @@ from contact.models import contact
 
 import os
 # Create your views here.
- 
+
 
 def contact_index(request):
     contacts = contact.objects.all()

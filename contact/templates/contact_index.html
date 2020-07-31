@@ -18,11 +18,11 @@
 {% block page_content %}
 hjefljklsdj
 
-{% for contact in contacts %} 
-  <p>{{ contact.Address }}</p>
-  <p>{{ contact.Phone }}</p>
-  <p>{{ contact.Email }}</p>
-{% endfor %}
+  {% for contact in contacts %} 
+    <p>{{ contact.Address }}</p>
+    <p>{{ contact.Phone }}</p>
+    <p>{{ contact.Email }}</p>
+  {% endfor %}
 
 {% endblock %}
 </body>
