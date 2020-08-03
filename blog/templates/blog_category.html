@@ -1,47 +1,96 @@
+{% block content %}
 <!DOCTYPE html>
 <html>
 <head>
-  <title>
-    <h2>
-       <span>GT> <span>Photography</span>
-    </h2> 
-  </title>
+  <title> GT_Photography </title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   {% load static %}
-  <link rel="stylesheet" href="{% static 'css/index.css' %}">
+  <script src="{% static 'js/GalleryDropDown.js' %}"></script>
+  <script src="{% static 'js/ContactDropDown.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'css/blog_index.css' %}">
 </head>
 
 <body>
   <header>
-    <span> 
+    
+    <div class="header">
       <img id="logo" src="{% static 'image/GT_LOGO.jpg' %}">
       <h2 id="web_name">
          <span id="web_name1" >G</span><span id="web_name2">T</span>
          <span id="web_name3">Photo</span><span id="web_name4">graphy</span>
       </h2>
-    </span>
+    </div>
+
+  </header>
+
+  <nav id="nav">
+    <div id="navContainer">
+      <div class="navbar">
+        <a href="{% url 'blog_index'%}">
+          Home
+        </a>
+        
+        <div class="dropdown">
+          <button class="dropbtn" onclick="GalleryDropDown()">Gallery</button>
+          <div id="myDropdown" class="dropdown-content">
+            <a href="{% url 'portrait_index'%}">Portrait</a>
+            <a href="{% url 'weddings_index'%}">Weddings</a>
+            <a href="{% url 'brand_index'%}">Brand</a>
+          </div>
+        </div>
+      </div>
+      
+
+      <div class="navbar">
+        <div class="dropdown">
+          <button class="dropbtn" onclick="ContactDropDown()" >Contact</button>
+        
+          <a href="{% url 'company_index' %}" style="margin-left: -4px; margin-bottom: -2px;">About</a>
+        <div>
+    </div>
 
     
-  </header>
-  <nav>
-    <p>
-      <input class="bbtn" type="button" value="Home">
-      <input class="bbtn" type="button" value="Gallery">
-    </p>
+  <div id="contact">
+    <div id="contact_Dropdown" class="dropdown-content1">
+        <h2 style="text-align: center; border: 2px solid white;">contacts</h2>
+          
+        {% for contact in contacts %} 
+          
+          <p ><b>Phone: </b>{{ contact.Phone }}</p>
+          <p><b>Email: </b>{{ contact.Email }}</p>
 
-    <p id="">
-      <input class="bbtn" type="button" value="Portrait">
-      <input class="bbtn" type="button" value="Weddings">
-      <input class="bbtn" type="button" value="Brand">
-    </p>
+            
+          <h3 style="text-align: center; border: 2px solid white;" >Our Social Networks</h3>
+              
+          <div>
+            <a href="" class="social">
+              <img src="{% static 'icons/facebook.png' %}" width="32" alt="Facebook">
+            </a>
 
+            <a href="" class="social">
+              <img src="{% static 'icons/twitter.png' %}" width="32" alt="Twitter">
+            </a>
 
+            <a href="" class="social">
+              <img src="{% static 'icons/linkedin.png' %}" width="32" alt="LinkedIn">
+            </a>
 
+            <a href="" class="social">
+              <img src="{% static 'icons/rss.png' %}" width="32" alt="RSS Feed">
+            </a>
+          </div>
+
+          <p>........................................................................</p>
+          
+        {% endfor %}
+      </div>
+
+    </div>
   </nav>
 
   <section>
     
-
-    {% block page_content %}
     <div>
       <h1>{{ category | title}}</h1>
         
@@ -69,7 +118,7 @@
         
       
     </div>
-    {% endblock %}
+    
         
  
 
@@ -77,6 +126,17 @@
   </section>
   
   <footer>
+    <div class="footer">
+      <div class="footer_container">
 
+        <div >
+          <div class="">
+            <div class="footer-copyright">&copy; 2020  <a>Shoot with GT</a>.</div>
+          </div>
+        </div>
+    
+      </div>
+    </div>
   </footer>
 </body>
+{% endblock %}

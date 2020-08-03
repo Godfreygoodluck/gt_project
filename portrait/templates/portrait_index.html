@@ -8,10 +8,6 @@
   {% load static %}
   <script src="{% static 'js/GalleryDropDown.js' %}"></script>
   <script src="{% static 'js/ContactDropDown.js' %}"></script>
-  <script src="{% static 'js/AboutDropDown.js' %}"></script>
-  <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
-  <script src="{% static 'js/infinite.min.js' %}"></script>
-  <script src="{% static 'js/jqueryMin.js' %}"></script>
   <link rel="stylesheet" href="{% static 'css/portrait_index.css' %}">
 </head>
 
@@ -31,65 +27,71 @@
   <nav id="nav">
     <div id="navContainer">
       <div class="navbar">
-        <a href="http://127.0.0.1:8000/blog/">Home</a>
+        <a href="{% url 'blog_index'%}">
+          Home
+        </a>
+        
         <div class="dropdown">
           <button class="dropbtn" onclick="GalleryDropDown()">Gallery</button>
           <div id="myDropdown" class="dropdown-content">
-            <a href="http://127.0.0.1:8000/portrait/">Portrait</a>
-            <a href="http://127.0.0.1:8000/weddings/">Weddings</a>
-            <a href="http://127.0.0.1:8000/brand/">Brand</a>
+            <a href="{% url 'portrait_index'%}">Portrait</a>
+            <a href="{% url 'weddings_index'%}">Weddings</a>
+            <a href="{% url 'brand_index'%}">Brand</a>
           </div>
         </div>
       </div>
+      
 
       <div class="navbar">
         <div class="dropdown">
-          <button class="dropbtn" onclick="ContactDropDown()">Contact</button>
-          
-        </div>
-
-        <div class="dropdown">
-          <button class="dropbtn" onclick="AboutDropDown()">About</button>
-        </div>
+          <button class="dropbtn" onclick="ContactDropDown()" >Contact</button>
         
-      </div>
+          <a href="{% url 'company_index' %}" style="margin-left: -4px; margin-bottom: -2px;">About</a>
+        <div>
     </div>
 
-    <div id="contact_about">
-      <div id="contact_Dropdown" class="dropdown-content1">
-        {% block page_content %}
-          <h2>contacts</h2>
+    
+  <div id="contact">
+    <div id="contact_Dropdown" class="dropdown-content1">
+        <h2 style="text-align: center; border: 2px solid white;">contacts</h2>
           
-          {% for contact in contacts %} 
-            <p><b>Address</b><address>{{ contact.Address }}</address></p>
-            <p><b>Phone</b>{{ contact.Phone }}</p>
-            <p><b>Email</b>{{ contact.Email }}</p>
-          {% endfor %}
+        {% for contact in contacts %} 
+          
+          <p ><b>Phone: </b>{{ contact.Phone }}</p>
+          <p><b>Email: </b>{{ contact.Email }}</p>
 
-        {% endblock %}      
-      </div>
+            
+          <h3 style="text-align: center; border: 2px solid white;" >Our Social Networks</h3>
+              
+          <div>
+            <a href="" class="social">
+              <img src="{% static 'icons/facebook.png' %}" width="32" alt="Facebook">
+            </a>
 
-      <div id="about_Dropdown" class="dropdown-content1">
-        
-        <h2>about</h2>
+            <a href="" class="social">
+              <img src="{% static 'icons/twitter.png' %}" width="32" alt="Twitter">
+            </a>
 
-        {% for about_photographer in About_Photographer %} 
-          <h1>{{ about_photographer.photographers_image }}</h1>
-          <h1>{{ about_photographer.about }}</h1>
-        {% endfor %} 
-        
-        {% for about_company in About_Company %} 
-          <p>{{ about_company.about }}</p>
+            <a href="" class="social">
+              <img src="{% static 'icons/linkedin.png' %}" width="32" alt="LinkedIn">
+            </a>
+
+            <a href="" class="social">
+              <img src="{% static 'icons/rss.png' %}" width="32" alt="RSS Feed">
+            </a>
+          </div>
+
+          <p>........................................................................</p>
+          
         {% endfor %}
-
       </div>
+
     </div>
   </nav>
 
  
 
   <section id="section">
-    
       <div id="gallery-flex-container" class="infinite-container">
         {% for portrait_project in numbers %} 
           <div class="flex-box" class="infinite-item" >
@@ -111,59 +113,12 @@
             
         {% endif %}
       </div>
-
-        
-      <div class="loading" style="display: none;">
-        loading...
-      </div>
-
-      <script>
-        var infinite = new Waypoint.infinite({
-          element: $('.infinite-container')[0],
-          onBeforePageLoad: function(){
-            $('.loading').show();
-          },
-          onAfterPageLoad: function($items){
-            $('.loading').hide();
-          }
-        });
-      </script>
-    
   </section>
   
   <footer>
     <div class="footer">
       <div class="footer_container">
-    
-        <div class="footer_con" >
-          <div class="contact" >
-            <h3>Contact Us</h3>
-            <p >
-              <b>Address:</b> Choba, Rivers State, Nigeria, Africa<br/>
-              <b>Phone:</b> +2348000000000<br/>
-              <b>Phone2:</b> +234801111111<br/>
-              <b>Email:</b> <a href="" style="display: flex; flex-wrap: wrap; color: #f2f2f2;">PhotographyWithGT@gmail.com</a>
-            </p>
-          </div>	
-    
-          <div class="social">
-            <h3 >Our Social Networks</h3>
-            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam.</p>
-    
-              <div >
-                <img src="{% static 'icons/facebook.png' %}" width="32" alt="Facebook">
-                <img src="{% static 'icons/twitter.png' %}" width="32" alt="Twitter">
-                <img src="{% static 'icons/linkedin.png' %}" width="32" alt="LinkedIn">
-                <img src="{% static 'icons/rss.png' %}" width="32" alt="RSS Feed">
-              </div>
-          </div>
-    
-          <div class="about" >
-            <h3>About Our Company</h3>
-              <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci.</p>
-          </div>
-        </div>
-    
+
         <div >
           <div class="">
             <div class="footer-copyright">&copy; 2020  <a>Shoot with GT</a>.</div>

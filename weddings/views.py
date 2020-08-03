@@ -4,6 +4,7 @@ import os
 
 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from contact.models import contact
 
 
 # Create your views here.
@@ -13,7 +14,8 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 def weddings_index(request):
 
     weddings = weddings_project.objects.all()
-    
+    contacts = contact.objects.all()
+
     page = request.GET.get('page', 1)
     paginator = Paginator(weddings, 12)
 
@@ -24,6 +26,9 @@ def weddings_index(request):
     except EmptyPage:
         numbers = paginator.page(paginator.num_pages)
 
+    context = {
+        'contacts' : contacts,
+        'numbers': numbers,
+    }
     
-    
-    return render(request, 'weddings_index.html', {'numbers': numbers})
+    return render(request, 'weddings_index.html', context=context)

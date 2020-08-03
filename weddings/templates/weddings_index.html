@@ -1,4 +1,4 @@
-
+{% block content %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,12 +6,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   {% load static %}
-  <script src="{% static 'js/w_navDropDown.js' %}"></script>
-  <script src="{% static 'js/w_jquery.waypoints.min.js' %}"></script>
-  <script src="{% static 'js/w_infinite.min.js' %}"></script>
-  <script src="{% static 'js/w_jqueryMin.js' %}"></script>
+  <script src="{% static 'js/GalleryDropDown.js' %}"></script>
+  <script src="{% static 'js/ContactDropDown.js' %}"></script>
   <link rel="stylesheet" href="{% static 'css/weddings_index.css' %}">
-  
 </head>
 
 <body>
@@ -26,105 +23,119 @@
     </div>
 
   </header>
+
   <nav id="nav">
     <div id="navContainer">
       <div class="navbar">
-        <a href="http://127.0.0.1:8000/blog/">Home</a>
+        <a href="{% url 'blog_index'%}">
+          Home
+        </a>
+        
         <div class="dropdown">
-          <button class="dropbtn" onclick="navDropDown()">Gallery</button>
+          <button class="dropbtn" onclick="GalleryDropDown()">Gallery</button>
           <div id="myDropdown" class="dropdown-content">
-            <a href="http://127.0.0.1:8000/portrait/">Portrait</a>
-            <a href="http://127.0.0.1:8000/weddings/">Weddings</a>
-            <a href="http://127.0.0.1:8000/brand/">Brand</a>
+            <a href="{% url 'portrait_index'%}">Portrait</a>
+            <a href="{% url 'weddings_index'%}">Weddings</a>
+            <a href="{% url 'brand_index'%}">Brand</a>
           </div>
         </div>
       </div>
+      
 
       <div class="navbar">
-        <a href="">Contact</a>
-        <a href="">About</a>
+        <div class="dropdown">
+          <button class="dropbtn" onclick="ContactDropDown()" >Contact</button>
+        
+          <a href="{% url 'company_index' %}" style="margin-left: -4px; margin-bottom: -2px;">About</a>
+        <div>
+    </div>
+
+    
+  <div id="contact">
+    <div id="contact_Dropdown" class="dropdown-content1">
+        <h2 style="text-align: center; border: 2px solid white;">contacts</h2>
+          
+        {% for contact in contacts %} 
+          
+          <p ><b>Phone: </b>{{ contact.Phone }}</p>
+          <p><b>Email: </b>{{ contact.Email }}</p>
+
+            
+          <h3 style="text-align: center; border: 2px solid white;" >Our Social Networks</h3>
+              
+          <div>
+            <a href="" class="social">
+              <img src="{% static 'icons/facebook.png' %}" width="32" alt="Facebook">
+            </a>
+
+            <a href="" class="social">
+              <img src="{% static 'icons/twitter.png' %}" width="32" alt="Twitter">
+            </a>
+
+            <a href="" class="social">
+              <img src="{% static 'icons/linkedin.png' %}" width="32" alt="LinkedIn">
+            </a>
+
+            <a href="" class="social">
+              <img src="{% static 'icons/rss.png' %}" width="32" alt="RSS Feed">
+            </a>
+          </div>
+
+          <p>........................................................................</p>
+          
+        {% endfor %}
       </div>
+
     </div>
   </nav>
 
  
 
   <section id="section">
-    {% block content %}
-      <div id="gallery-flex-container" class="infinite-container">
-        {% for weddings_project in numbers %} 
-          <div class="flex-box" class="infinite-item" >
+    <div id="gallery-flex-container" class="infinite-container">
+      {% for weddings_project in numbers %} 
+        <div class="flex-box" class="infinite-item" >
             
-            <a target="_blank" href="{{ weddings_project.upload_image.url }}">
-              <img class="image" src="{{ weddings_project.upload_image.url }}" alt="" width="300">
-            </a>
-            
-          </div>
-        {% endfor %}
-      </div>
-
-      <div class="extra">
-        {% if numbers.has_next %}
-            
-          <a  class="infinite-more-link" href="?page={{ numbers.next_page_number }}" style="text-decoration: none; ">
-           see more 
+          <a target="_blank" href="{{ weddings_project.upload_image.url }}">
+            <img class="image" src="{{ weddings_project.upload_image.url }}" alt="" width="300">
           </a>
             
-        {% endif %}
-      </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    <div class="extra">
+      {% if numbers.has_next %}
+            
+        <a  class="infinite-more-link" href="?page={{ numbers.next_page_number }}" style="text-decoration: none; ">
+         see more 
+        </a>
+            
+      {% endif %}
+    </div>
 
         
-      <div class="loading" style="display: none;">
-        loading...
-      </div>
+    <div class="loading" style="display: none;">
+      loading...
+    </div>
 
-      <script>
-        var infinite = new Waypoint.infinite({
-          element: $('.infinite-container')[0],
-          onBeforePageLoad: function(){
-            $('.loading').show();
-          },
-          onAfterPageLoad: function($items){
-            $('.loading').hide();
-          }
-        });
-      </script>
-    {% endblock %}
+    <script>
+      var infinite = new Waypoint.infinite({
+        element: $('.infinite-container')[0],
+        onBeforePageLoad: function(){
+          $('.loading').show();
+        },
+        onAfterPageLoad: function($items){
+          $('.loading').hide();
+        }
+      });
+    </script>
   </section>
   
   <footer>
     <div class="footer">
       <div class="footer_container">
-    
-        <div class="footer_con" >
-          <div class="contact" >
-            <h3>Contact Us</h3>
-            <p >
-              <b>Address:</b> Choba, Rivers State, Nigeria, Africa<br/>
-              <b>Phone:</b> +2348000000000<br/>
-              <b>Phone2:</b> +234801111111<br/>
-              <b>Email:</b> <a href="" style="display: flex; flex-wrap: wrap; color: #f2f2f2;">PhotographyWithGT@gmail.com</a>
-            </p>
-          </div>	
-    
-          <div class="social">
-            <h3 >Our Social Networks</h3>
-            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam.</p>
-    
-              <div >
-                <img src="{% static 'icons/facebook.png' %}" width="32" alt="Facebook">
-                <img src="{% static 'icons/twitter.png' %}" width="32" alt="Twitter">
-                <img src="{% static 'icons/linkedin.png' %}" width="32" alt="LinkedIn">
-                <img src="{% static 'icons/rss.png' %}" width="32" alt="RSS Feed">
-              </div>
-          </div>
-    
-          <div class="about" >
-            <h3>About Our Company</h3>
-              <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci.</p>
-          </div>
-        </div>
-    
+
         <div >
           <div class="">
             <div class="footer-copyright">&copy; 2020  <a>Shoot with GT</a>.</div>
@@ -137,3 +148,4 @@
 
 </body>
 </html>
+{% endblock %}

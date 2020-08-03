@@ -1,11 +1,11 @@
 function GalleryDropDown(){
     var dropdown = document.getElementById("myDropdown");
 
-    if(myDropdown.style.display == 'none'){
+    if(myDropdown.style.display == 'flex'){
+        myDropdown.style.display = 'none';
+    }else{
         myDropdown.style.display = 'flex';
         myDropdown.style.flexDirection = 'column';
-    }else{
-        myDropdown.style.display = 'none';
     };
 
 

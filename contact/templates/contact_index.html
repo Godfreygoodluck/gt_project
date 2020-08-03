@@ -1,4 +1,4 @@
-
+{% block content %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,14 +6,95 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   {% load static %}
-  <script src="{% static 'js/b_navDropDown.js' %}"></script>
-  <script src="{% static 'js/b_jquery.waypoints.min.js' %}"></script>
-  <script src="{% static 'js/b_infinite.min.js' %}"></script>
-  <script src="{% static 'js/b_jqueryMin.js' %}"></script>
-  <link rel="stylesheet" href="{% static 'css/brand_index.css' %}">
+  <script src="{% static 'js/GalleryDropDown.js' %}"></script>
+  <script src="{% static 'js/ContactDropDown.js' %}"></script>
+  <script src="{% static 'js/AboutDropDown.js' %}"></script>
+  <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+  <script src="{% static 'js/infinite.min.js' %}"></script>
+  <script src="{% static 'js/jqueryMin.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'css/contact_index.css' %}">
 </head>
 
-<body style="background-color: chartreuse;">
+<body>
+  <header>
+    
+    <div class="header">
+      <img id="logo" src="{% static 'image/GT_LOGO.jpg' %}">
+      <h2 id="web_name">
+         
+         <span id="web_name3">Photo</span><span id="web_name4">graphy</span>
+      </h2>
+    </div>
+
+  </header>
+
+  <nav id="nav">
+    <div id="navContainer">
+      <div class="navbar">
+        <a href="{% url 'blog_index'%}" style="padding: 8px;">
+          Home
+        </a>
+        
+        <div class="dropdown1">
+          <button class="dropbtn" onclick="GalleryDropDown()">Gallery</button>
+          <div id="myDropdown" class="dropdown-content">
+            <a href="{% url 'portrait_index'%}">Portrait</a>
+            <a href="{% url 'weddings_index'%}">Weddings</a>
+            <a href="{% url 'brand_index'%}">Brand</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="navbar">
+        <div class="dropdown2">
+          <button class="dropbtn" onclick="ContactDropDown()" >
+            Contact
+          </button>
+          
+          <div id="contact_Dropdown" class="dropdown-content1">
+            <h2 style="text-align: center; border: 2px solid white;">
+              contacts
+            </h2>
+              
+            {% for contact in contacts %} 
+              
+            <p ><b>Phone: </b>{{ contact.Phone }}</p>
+            <p><b>Email: </b>{{ contact.Email }}</p>
+
+                
+            <h3 style="text-align: center; border: 2px solid white;" >Our Social Networks</h3>
+                  
+            <div>
+              <a href="" class="social">
+                <img src="{% static 'icons/facebook.png' %}" width="32" alt="Facebook">
+              </a>
+
+              <a href="" class="social">
+                <img src="{% static 'icons/twitter.png' %}" width="32" alt="Twitter">
+               </a>
+
+              <a href="" class="social">
+                <img src="{% static 'icons/linkedin.png' %}" width="32" alt="LinkedIn">
+              </a>
+
+              <a href="" class="social">
+                <img src="{% static 'icons/rss.png' %}" width="32" alt="RSS Feed">
+              </a>
+            </div>
+
+            <p>........................................................................</p>
+          
+            {% endfor %}
+          </div>
+        </div>
+
+        <a href="{% url 'company_index' %}" style="padding: 8px; ">
+          About
+        </a>
+
+      <div>
+    </div>
+  </nav>
 
 {% block page_content %}
 hjefljklsdj

@@ -1,11 +1,11 @@
 function ContactDropDown(){
     var dropdown = document.getElementById("contact_Dropdown");
 
-    if(contact_Dropdown.style.display == 'none'){
+    if(contact_Dropdown.style.display == 'flex'){
+        contact_Dropdown.style.display = 'none';
+    }else{
         contact_Dropdown.style.display = 'flex';
         contact_Dropdown.style.flexDirection = 'column';
-    }else{
-        contact_Dropdown.style.display = 'none';
     };
 
 
@@ -15,4 +15,5 @@ function ContactDropDown(){
             
         }
     };
-};
+}; 
+

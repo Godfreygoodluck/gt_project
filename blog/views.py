@@ -5,11 +5,14 @@ import os
 
 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from contact.models import contact
+
 
 # Create your views here.
 
 def blog_index(request):
     posts = Post.objects.all().order_by('-created_on')
+    contacts = contact.objects.all()
 
     page = request.GET.get('page', 1)
     paginator = Paginator(posts, 12)
@@ -20,8 +23,13 @@ def blog_index(request):
         numbers = paginator.page(1)
     except EmptyPage:
         numbers = paginator.page(paginator.num_pages)
+    
+    context = {
+        'contacts' : contacts,
+        'numbers': numbers,
+    }
 
-    return render(request, 'blog_index.html', {'numbers': numbers})
+    return render(request, 'blog_index.html', context=context)
 
 
 
@@ -31,8 +39,10 @@ def blog_category(request, category):
     ).order_by(
         '-created_on'
     )
+    contacts = contact.objects.all()
     context = {
         "category": category,
+        'contacts' : contacts,
         'posts' : posts
     }
     
@@ -43,6 +53,7 @@ def blog_category(request, category):
 
 def blog_detail(request, pk):
     post = Post.objects.get(pk=pk)
+    contacts = contact.objects.all()
 
     form = CommentForm()
     if request.method == 'POST':
@@ -72,6 +83,7 @@ def blog_detail(request, pk):
         "post": post,
         "numbers": numbers,
         "form": form,
+        'contacts' : contacts,
     }
     return render(request, "blog_detail.html", context)
 
