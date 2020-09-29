@@ -17,13 +17,12 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from nav import views as nav_views
+from header import views as header_views
+from gallery import views as gallery_views
+from index import views as index_views
 
 urlpatterns = [
-    path('blog/', include('blog.urls')),
-    path('portrait/', include('portrait.urls')),
-    path('weddings/', include('weddings.urls')),
-    path('brand/', include('brand.urls')),
-    path('contact/', include('contact.urls')),
-    path('about/', include('about.urls')),
+    path('', include('index.urls')),
     path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,0 +1,68 @@
+{% block content %}
+{% load static %}
+
+<nav id="nav">
+    <div id="navContainer">
+      <div class="navbar">
+        <a href="{% url 'blog_index'%}">
+          Home
+        </a>
+        
+        <div class="dropdown">
+          <button class="dropbtn" onclick="GalleryDropDown()">Gallery</button>
+          <div id="myDropdown" class="dropdown-content">
+            <a href="{% url 'portrait_index'%}">Portrait</a>
+            <a href="{% url 'weddings_index'%}">Weddings</a>
+            <a href="{% url 'brand_index'%}">Brand</a>
+          </div>
+        </div>
+      </div>
+      
+
+      <div class="navbar">
+        <div class="dropdown">
+          <button class="dropbtn" onclick="ContactDropDown()" >Contact</button>
+        
+          <a href="{% url 'company_index' %}" style="margin-left: -4px; margin-bottom: -2px;">About</a>
+        <div>
+    </div>
+
+    
+  <div id="contact">
+    <div id="contact_Dropdown" class="dropdown-content1">
+        <h2 style="text-align: center; border: 2px solid white;">contacts</h2>
+          
+        {% for contact in contacts %} 
+          
+          <p ><b>Phone: </b>{{ contact.Phone }}</p>
+          <p><b>Email: </b>{{ contact.Email }}</p>
+
+            
+          <h3 style="text-align: center; border: 2px solid white;" >Our Social Networks</h3>
+              
+          <div>
+            <a href="" class="social">
+              <img src="{% static 'icons/facebook.png' %}" width="32" alt="Facebook">
+            </a>
+
+            <a href="" class="social">
+              <img src="{% static 'icons/twitter.png' %}" width="32" alt="Twitter">
+            </a>
+
+            <a href="" class="social">
+              <img src="{% static 'icons/linkedin.png' %}" width="32" alt="LinkedIn">
+            </a>
+
+            <a href="" class="social">
+              <img src="{% static 'icons/rss.png' %}" width="32" alt="RSS Feed">
+            </a>
+          </div>
+
+          <p>........................................................................</p>
+          
+        {% endfor %}
+      </div>
+
+    </div>
+  </nav>
+  {% endblock %}

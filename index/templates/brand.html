@@ -1,0 +1,12 @@
+{% for brand_project in brand %}
+    <div class="col-md-4 col-ms-6" class="toggle-content" >
+                                        
+        <div class="g-item" id="" >
+            <img class="image" src="{{ brand_project.upload_image.url }}" alt="" >
+            <a data-rel="lightbox" class="overlay" href="{{ brand_project.upload_image.url }}">
+                <span>+</span>
+            </a>
+        </div> <!-- /.g-item -->
+                                        
+    </div> <!-- /.col-md-4 -->
+{% endfor %}

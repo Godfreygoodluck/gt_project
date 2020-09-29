@@ -5,7 +5,7 @@ from django.db import models
 class Category(models.Model):
     name = models.CharField(max_length=20)
 
-class Post(models.Model):
+class blog_post(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
     upload_image = models.ImageField(upload_to = "gallery/blog")
@@ -17,4 +17,4 @@ class Comment(models.Model):
     author = models.CharField(max_length=60)
     body = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
-    post = models.ForeignKey('Post', on_delete=models.CASCADE)
+    post = models.ForeignKey('blog_post', on_delete=models.CASCADE)

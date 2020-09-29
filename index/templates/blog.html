@@ -1,0 +1,38 @@
+<div  class="gallary_container" class="g-item" id="blog">
+    {% for blog_post in blog %}
+
+        <div class="col-md-4 col-ms-6" style="border: ;" >
+
+            <h2  >
+              <a class="centerTitle" class="centerText" href="{% url 'blog_category' blog_post.pk %}">
+                {{blog_post.title}}
+              </a>
+            </h2>
+            
+            <div class="g-item" id="" >  
+              <a target="_blank" href="{{ blog_post.upload_image.url }}">
+                    <img  src="{{ blog_post.upload_image.url }}" alt="" width="240" >
+              </a>
+            </div>    
+            
+            <div >
+              <small>
+                {{ blog_post.created_on.date }} 
+              </small>
+            </div>
+
+            <p>
+                {{ blog_post.description | slice:":400" }}... 
+                <a href="{%url 'blog_category' blog_post.pk %}">
+                  continue reading
+                </a>
+                <a data-rel="lightbox"  href="{{blog_post.title.url}}">
+                  <span>+</span>
+                </a>  
+                
+            </p>
+            
+        </div>
+        
+      {% endfor %}
+</div>

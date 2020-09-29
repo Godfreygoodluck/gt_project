@@ -1,0 +1,59 @@
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title> GT_Photography </title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% load static %}
+  <script src="{% static 'js/GalleryDropDown.js' %}"></script>
+  <script src="{% static 'js/ContactDropDown.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'css/gallery_index.css' %}">
+</head>
+
+<body>
+  {%include 'header.html' %}
+
+  {%include 'nav.html' %}
+
+  <section id="section">
+      <div id="gallery-flex-container" class="infinite-container">
+        {% for gallery_project in numbers %} 
+          <div class="flex-box" class="infinite-item" >
+            
+            <a target="_blank" href="{{ gallery_project.upload_image.url }}">
+              <img class="image" src="{{ gallery_project.upload_image.url }}" alt="" width="300">
+            </a>
+            
+          </div>
+        {% endfor %}
+      </div>
+
+      <div class="extra">
+        {% if numbers.has_next %}
+            
+          <a  class="infinite-more-link" href="?page={{ numbers.next_page_number }}" style="text-decoration: none; ">
+           see more 
+          </a>
+            
+        {% endif %}
+      </div>
+  </section>
+  
+  <footer>
+    <div class="footer">
+      <div class="footer_container">
+
+        <div >
+          <div class="">
+            <div class="footer-copyright">&copy; 2020  <a>Shoot with GT</a>.</div>
+          </div>
+        </div>
+    
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,67 @@
+{% block content %}
+<div id="section">
+    <small style="float: right; color: #f2f2f2; margin: 2px;">
+        {{ post.created_on.date }}:
+      </small>
+    <div id="each_post-flex-container" style="background-color: #f2f2f2; width: 90%;">  
+      <h2 class="title"  >
+        <a class="centerTitle" class="centerText" href="{% url 'blog_category' post.pk %}">
+          {{post.title}}
+        </a>
+      </h2>
+
+      <div id="image_wraper" >  
+        <div target="_blank" href="{{ post.upload_image.url }}">
+            <img id="image" src="{{ post.upload_image.url }}" alt="" width="300px" >
+            <p id="description">
+              {{ post.description }}
+            </p>
+          </div>
+      </div>
+
+      <div id="commentBox">
+        <h3 style=" margin-left: 5px;">Leave a comment:</h3>
+        <form action="/blog/{{post.pk}}/" method="post">
+            {% csrf_token %}
+
+            <div style=" margin-left: 5px;" >
+              {{ form.author}}
+            </div>
+
+            <div id="comment" style="margin-top: 5px; width: 30px;" >
+              {{ form.body }}
+            </div>
+
+            <button type="submit" class= "submit_btn" style="	padding: 5px; margin-left: 5px;" >
+              submit
+            </button>
+          </form>
+      </div>
+        
+      {{ post.body | linebreaks }}
+        
+      <h3 style="border: 2px solid black;">comments:</h3>
+
+      {% for comment in comment_numbers %}
+      <div>
+        <p style="color: darkblue;">
+          on{{comment.created_on.date }}&nbsp;
+                
+          <b style="color: black;">{{ comment.author }}</b> wrote:
+        </p>
+        <p>{{ comment.body }}<hr></p>
+      </div>
+      {% endfor %}
+    </div>
+            
+    <div class="extra">
+      {% if numbers.has_next %}
+          
+        <a  class="infinite-more-link" href="?page={{ numbers.next_page_number }}" style="text-decoration: none; ">
+        see more comments
+        </a>
+          
+      {% endif %}
+    </div>
+</div>
+{% endblock %}

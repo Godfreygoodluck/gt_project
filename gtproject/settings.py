@@ -31,6 +31,10 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'gallery.apps.GalleryConfig',
+    'index.apps.IndexConfig',
+    'header.apps.HeaderConfig',
+    'nav.apps.NavConfig',
     'about.apps.AboutConfig',
     'contact.apps.ContactConfig',
     'blog.apps.BlogConfig',
@@ -60,12 +64,7 @@ ROOT_URLCONF = 'gtproject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [ os.path.join(BASE_DIR, 'blog/templates',)],
-        'DIRS': [ os.path.join(BASE_DIR, 'brand/templates',)],
-        'DIRS': [ os.path.join(BASE_DIR, 'portrait/templates',)],
-        'DIRS': [ os.path.join(BASE_DIR, 'weddings/templates',)],
-        'DIRS': [ os.path.join(BASE_DIR, 'contact/templates',)],
-        'DIRS': [ os.path.join(BASE_DIR, 'about/templates',)],
+        'DIRS': [ os.path.join(BASE_DIR, 'index/templates',)],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
