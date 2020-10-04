@@ -10,7 +10,7 @@ from blog.models import blog_post, Comment, Category
 from blog.forms import CommentForm
 from brand.models import brand_project
 from about.models import about_company, about_photographer
-from index.models import our_Services, our_Surport, testimonials
+from index.models import our_Services, our_Surport, testimonials, wallpaper
 
 
 # Create your views here.
@@ -103,7 +103,18 @@ def index(request):
     #services..................................................................................
     services = our_Services.objects.all()
     surport = our_Surport.objects.all()
-    testimonial = testimonials.objects.all()
+    wallpapers = wallpaper.objects.all().order_by('-created_on')
+    testimonial = testimonials.objects.all().order_by('-created_on')
+    
+    results_per_page = 3
+    paginator = Paginator(testimonial, results_per_page)
+
+    try:
+        testimonial = paginator.page(page)
+    except PageNotAnInteger:
+        testimonial = paginator.page(2)
+    except EmptyPage:
+        testimonial = paginator.page(paginator.num_pages)
     
     context = {
         'services' : services,
@@ -114,6 +125,7 @@ def index(request):
         'weddings': weddings,
         'portrait': portrait,
         'contacts' : contacts,
+        'wallpapers' : wallpapers,        
         'About_Company' : About_Company,
         'About_Photographer' : About_Photographer,
         
@@ -254,7 +266,7 @@ def blog_detail(request, pk):
     try:
         comment_numbers = paginator.page(page)
     except PageNotAnInteger:
-        comment_numbers = paginator.page(1)
+        comment_numbers = paginator.page(2)
     except EmptyPage:
         comment_numbers = paginator.page(paginator.num_pages)
 
@@ -273,11 +285,38 @@ def blog_category(request, category):
     ).order_by(
         '-created_on'
     )
-    contacts = contact.objects.all()
+    
     context = {
         "category": category,
-        'contacts' : contacts,
         'posts' : posts
     }
     
     return render(request, 'blog_category.html', context=context)
+
+
+#testimonials...................................................................
+def testimonial_index(request):
+    page = request.POST.get('page')
+    testimonial = testimonials.objects.all().order_by('-created_on')
+    
+    results_per_page = 3
+    paginator = Paginator(testimonial, results_per_page)
+
+    try:
+        testimonial = paginator.page(page)
+    except PageNotAnInteger:
+        testimonial = paginator.page(2)
+    except EmptyPage:
+        testimonial = paginator.page(paginator.num_pages)
+    
+    testimonial_posts_html = loader.render_to_string(
+        'testimonials.html',
+        {'testimonial': testimonial}
+    )
+
+    testimonial_output_data = {
+        'testimonial_posts_html': testimonial_posts_html,
+        'has_next': testimonial.has_next()
+    }
+    
+    return JsonResponse(testimonial_output_data)   

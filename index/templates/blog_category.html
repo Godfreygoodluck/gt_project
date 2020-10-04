@@ -1,0 +1,27 @@
+<div>
+    <h1>{{ category | title}}</h1>
+      
+    {% for blog_post in posts %}
+        <h2><a href="{% url 'blog_category' post.pk %}">{{post.title}}</a></h2>
+        <small>
+            {{ blog_post.created_on.date }} |&nbsp;
+            Categories:&nbsp;
+            {% for category in blog_post.categories.all %}
+              <a href="{% url 'blog_category' category.name %}">
+              {{ category.name }}
+              </a>&nbsp;
+            {% endfor %}
+        </small>
+
+        
+        <div class="">
+            
+          <a target="_blank" href="{{ blog_post.upload_image.url }}">
+            <img id="image" src="{{ blog_post.upload_image.url }}" alt="" width="600" height="400">
+          </a>
+            
+        </div>
+        <p>{{ blog_post.description | slice:":400" }}...</p>
+      {% endfor %}  
+    
+  </div>

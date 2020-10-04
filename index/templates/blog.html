@@ -1,7 +1,7 @@
 <div  class="gallary_container" class="g-item" id="blog">
     {% for blog_post in blog %}
 
-        <div class="col-md-4 col-ms-6" style="border: ;" >
+        <div class="col-md-4 col-ms-6" >
 
             <h2  >
               <a class="centerTitle" class="centerText" href="{% url 'blog_category' blog_post.pk %}">
@@ -22,14 +22,10 @@
             </div>
 
             <p>
-                {{ blog_post.description | slice:":400" }}... 
+                {{ blog_post.description | slice:":400" }} 
                 <a href="{%url 'blog_category' blog_post.pk %}">
-                  continue reading
+                  continue reading...
                 </a>
-                <a data-rel="lightbox"  href="{{blog_post.title.url}}">
-                  <span>+</span>
-                </a>  
-                
             </p>
             
         </div>

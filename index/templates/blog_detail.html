@@ -1,18 +1,49 @@
 {% block content %}
+<!DOCTYPE html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+
+    <title>Shoot with Gt</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet">
+    {% load static %}
+    
+    <link rel="stylesheet" href="{% static 'css/normalize.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/templatemo_misc.css' %}">
+    <link rel="stylesheet" href="{% static 'css/templatemo_style.css' %}">
+    
+    <script type="text/javascript">
+        window.CSRF_TOKEN = "{{ csrf_token}}"
+    </script>
+	
+</head>
+
+
+
 <div id="section">
-    <small style="float: right; color: #f2f2f2; margin: 2px;">
-        {{ post.created_on.date }}:
-      </small>
+    
     <div id="each_post-flex-container" style="background-color: #f2f2f2; width: 90%;">  
-      <h2 class="title"  >
-        <a class="centerTitle" class="centerText" href="{% url 'blog_category' post.pk %}">
+      <h2 class="centerTitle"  >
+        <a href="{% url 'blog_category' post.pk %}">
           {{post.title}}
         </a>
       </h2>
 
-      <div id="image_wraper" >  
-        <div target="_blank" href="{{ post.upload_image.url }}">
-            <img id="image" src="{{ post.upload_image.url }}" alt="" width="300px" >
+      <div id="image_wraper" style="padding: 10px;">  
+        <div >
+            <a target="_blank" href="{{ post.upload_image.url }}">
+              <img id="image" src="{{ post.upload_image.url }}" alt="" width="400px" >
+            </a>
+            <small style=" color: #080808; margin: 2px; margin-left:8px; " >
+              {{ post.created_on.date }}:
+            </small>
             <p id="description">
               {{ post.description }}
             </p>
@@ -20,19 +51,19 @@
       </div>
 
       <div id="commentBox">
-        <h3 style=" margin-left: 5px;">Leave a comment:</h3>
+        <h3 style=" padding: 8px; margin-top: 20px;" >Leave a comment:</h3>
         <form action="/blog/{{post.pk}}/" method="post">
             {% csrf_token %}
 
-            <div style=" margin-left: 5px;" >
+            <div style="  padding: 8px; " >
               {{ form.author}}
             </div>
 
-            <div id="comment" style="margin-top: 5px; width: 30px;" >
+            <div id="comment" style="margin-top: 5px; padding: 8px; " >
               {{ form.body }}
             </div>
 
-            <button type="submit" class= "submit_btn" style="	padding: 5px; margin-left: 5px;" >
+            <button type="submit" class= "submit_btn" style="	padding: 8px; margin-left: 5px;" >
               submit
             </button>
           </form>

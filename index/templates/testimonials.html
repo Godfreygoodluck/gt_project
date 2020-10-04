@@ -1,0 +1,12 @@
+{% for testimonials in testimonial %}
+    <h3>Testimonials</h3>
+                                     
+    <a href="{{ testimonials.testimonial_image.url }}" class="g-item">
+        <img class="image" src="{{ testimonials.testimonial_image.url }}" alt="" width="250">
+    </a>
+    <p style="border-bottom: 2px solid #ffdcb8; padding: 7px; ">
+        {{ testimonials.testimonial }}
+    </p> 
+                                        
+        <br>
+{% endfor %}

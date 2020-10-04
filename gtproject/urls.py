@@ -23,6 +23,6 @@ from gallery import views as gallery_views
 from index import views as index_views
 
 urlpatterns = [
-    path('', include('index.urls')),
     path('admin/', admin.site.urls),
+    path('', include('index.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
