@@ -42,7 +42,7 @@
                     
                     <div class="logo-wrapper">
                         <h1 class="logo">
-                            <a href="#"><img src="{% static 'images/logo.jpg' %}" alt="Gt" width="135">
+                            <a href="#"><img src="{% static 'images/logo.jpg' %}" alt="Gt" id="logo">
                             <span>Gt Photography</span></a>
                         </h1>
                     </div> <!-- /.logo-wrapper -->
@@ -130,7 +130,7 @@
             
                                         <div  >
                                         <a href="{{ about_photographer.photographers_image.url }}" class="g-item"> 
-                                            <img src="{{ about_photographer.photographers_image.url }}" id="image"   width="250px">
+                                            <img src="{{ about_photographer.photographers_image.url }}"  class="image" >
                                         </a>
                                         <p id="about_photographer">   {{ about_photographer.about }}</p>
                                         </div>

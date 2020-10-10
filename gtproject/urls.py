@@ -22,6 +22,10 @@ from header import views as header_views
 from gallery import views as gallery_views
 from index import views as index_views
 
+admin.site.site_header = "Shoot With Gt"
+admin.site.site_title = "Gt Admin Portal"
+admin.site.index_title  = "Welcome to Gt portal" 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('index.urls')),

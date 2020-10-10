@@ -39,7 +39,7 @@
       <div id="image_wraper" style="padding: 10px;">  
         <div >
             <a target="_blank" href="{{ post.upload_image.url }}">
-              <img id="image" src="{{ post.upload_image.url }}" alt="" width="400px" >
+              <img id="image" src="{{ post.upload_image.url }}" alt="" class="image" >
             </a>
             <small style=" color: #080808; margin: 2px; margin-left:8px; " >
               {{ post.created_on.date }}:
@@ -52,7 +52,7 @@
 
       <div id="commentBox">
         <h3 style=" padding: 8px; margin-top: 20px;" >Leave a comment:</h3>
-        <form action="/blog/{{post.pk}}/" method="post">
+        <form action="/{{post.pk}}/" method="post">
             {% csrf_token %}
 
             <div style="  padding: 8px; " >
